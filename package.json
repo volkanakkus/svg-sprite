@@ -4,6 +4,7 @@
     "description": "Easy way to use and optimize svg files in Nuxt.js",
     "repository": "nuxt-community/svg-sprite-module",
     "license": "MIT",
+    "type": "module",
     "exports": {
         ".": {
           "types": "./dist/types.d.ts",
@@ -17,10 +18,10 @@
         "dist"
       ],
     "scripts": {
-        "prepack": "nuxt-module-build build",
+        "prepack": "yarn nuxt-module-build build",
         "dev": "nuxi dev playground",
-        "dev:build": "nuxi build playground",
-        "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+        "dev:build": "yarn nuxi build playground",
+        "dev:prepare": "yarn nuxt-module-build build --stub && yarn nuxt-module-build prepare && yarn nuxi prepare playground",
         "dev:docs": "cd docs && yarn && yarn dev",
         "codesandbox": "cd .codesandbox && yarn && yarn dev",
         "release": "npm run lint && npm run prepack && changelogen && npm publish && git push --follow-tags",
