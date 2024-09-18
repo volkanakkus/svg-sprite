@@ -6,62 +6,48 @@
     "license": "MIT",
     "exports": {
         ".": {
-            "import": "./dist/module.mjs",
-            "require": "./dist/module.cjs"
+          "types": "./dist/types.d.ts",
+          "import": "./dist/module.mjs",
+          "require": "./dist/module.cjs"
         }
-    },
-    "main": "./dist/module.cjs",
-    "module": "./dist/module.mjs",
-    "types": "./dist/types.d.ts",
-    "files": [
+      },
+      "main": "./dist/module.cjs",
+      "types": "./dist/types.d.ts",
+      "files": [
         "dist"
-    ],
+      ],
     "scripts": {
-        "build": "nuxt-module-build",
+        "prepack": "nuxt-module-build build",
         "dev": "nuxi dev playground",
-        "dev:docs": "nuxi dev docs",
         "dev:build": "nuxi build playground",
-        "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
-        "lint": "eslint --ext .ts --ext .vue .",
-        "prepublishOnly": "npm run build",
-        "release": "npm run test && release-it",
-        "prepack": "nuxt-module-build",
-        "test": "vitest run"
+        "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+        "dev:docs": "cd docs && yarn && yarn dev",
+        "codesandbox": "cd .codesandbox && yarn && yarn dev",
+        "release": "npm run lint && npm run prepack && changelogen && npm publish && git push --follow-tags",
+        "lint": "eslint .",
+        "test": "vitest run",
+        "test:watch": "vitest watch"
     },
     "dependencies": {
-        "@nuxt/kit": "^3.3.2",
-        "svgo": "^3.0.2"
+        "@nuxt/kit": "^3.10.3",
+        "svgo": "^3.2.0"
     },
     "devDependencies": {
-        "@nuxt/module-builder": "^0.2.1",
-        "@nuxt/test-utils": "latest",
+        "@nuxt/module-builder": "^0.5.5",
+        "@nuxt/test-utils": "^3.11.0",
         "@nuxtjs/eslint-config-typescript": "latest",
         "@types/svgo": "^2.6.4",
-        "eslint": "^8.37.0",
-        "nuxt": "^3.3.2",
-        "playwright": "^1.32.1",
-        "release-it": "^15.9.3",
-        "vitest": "^0.29.8"
+        "@nuxt/devtools": "latest",
+        "@nuxt/eslint-config": "^0.2.0",
+        "playwright": "^1.41.2",
+        "release-it": "^17.6.0",
+        "@nuxt/schema": "^3.10.3",
+        "@types/node": "^20.11.22",
+        "eslint": "^8.57.0",
+        "nuxt": "^3.10.3",
+        "vitest": "^1.3.1"
     },
-    "packageManager": "pnpm@8.1.0",
-    "pnpm": {
-        "peerDependencyRules": {
-            "allowedVersions": {
-                "vue": "^3.2.45"
-            },
-            "ignoreMissing": [
-                "webpack",
-                "vue"
-            ]
-        }
-    },
-    "release-it": {
-        "git": {
-            "commitMessage": "chore(release): release v${version}"
-        },
-        "github": {
-            "release": true,
-            "releaseName": "v${version}"
-        }
+    "resolutions": {
+        "string-width": "4.2.3"
     }
 }
